@@ -6,7 +6,7 @@
 	<artifactId>ROOT</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-	<name>TCPIP.co.kr root</name>
+	<name>TCPIP.CO.KR</name>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -18,7 +18,10 @@
 	<build>
 		<finalName>ROOT</finalName>
 		<plugins>
+
+
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.4.0</version>
 				<configuration>
@@ -34,6 +37,8 @@
 					</archive>
 				</configuration>
 			</plugin>
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -41,8 +46,34 @@
 				<configuration>
 					<source>${maven.compiler.source.version}</source>
 					<target>${maven.compiler.target.version}</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeScope>runtime</includeScope>
+							<outputDirectory>${project.build.directory}/libs/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 	</build>
 </project>
