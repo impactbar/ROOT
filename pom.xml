@@ -7,43 +7,39 @@
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>TCPIP.CO.KR</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.0</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>ROOT</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.4.0</version>
+				<artifactId>maven-resources-plugin</artifactId> 
+				<version>3.3.1</version>
 				<configuration>
-					<webResources>
-						<resource>
-							<directory>additional_resources</directory>
-						</resource>
-					</webResources>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
+					<!-- source>1.8</source> 
+					<target>1.8</target -->
 					<source>${maven.compiler.source.version}</source>
 					<target>${maven.compiler.target.version}</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
@@ -52,28 +48,15 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.5.1</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeScope>runtime</includeScope>
-							<outputDirectory>${project.build.directory}/libs/</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory> 
+					<failOnMissingWebXml>false</failOnMissingWebXml> 
+				</configuration>
 			</plugin>
-
-
 		</plugins>
 	</build>
 </project>
