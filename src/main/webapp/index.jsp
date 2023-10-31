@@ -5,6 +5,7 @@
     <title>파일 목록</title>
 </head>
 <body>
+파일목록 : <br>
 <%
     Path dir = Paths.get("/NFS_Data/Report");
 
